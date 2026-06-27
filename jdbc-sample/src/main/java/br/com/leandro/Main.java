@@ -20,12 +20,24 @@ public class Main {
 
         flyway.migrate();
 
-        var employee = new EmployeeEntity();
-        employee.setName("Juan");
-        employee.setSalary(new BigDecimal("2500"));
-        employee.setBirthday(OffsetDateTime.now().minusYears(20));
+//        var employee = new EmployeeEntity();
+//        employee.setId(3);
+//        employee.setName("Leonardo");
+//        employee.setSalary(new BigDecimal(1200));
+//        employee.setBirthday(OffsetDateTime.now().minusYears(16));
+//        employeeDAO.update(employee);
+//        System.out.println(employee);
+
+        System.out.println(employeeDAO.findById(3));
+
+//        employeeDAO.findAll().forEach(System.out::println);
+
+        /*var employee = new EmployeeEntity();
+        employee.setName("João");
+        employee.setSalary(new BigDecimal("2600"));
+        employee.setBirthday(OffsetDateTime.now().minusYears(56));
         System.out.println(employee);
         employeeDAO.insert(employee);
-        System.out.println(employee);
+        System.out.println(employee);*/
     }
 }
