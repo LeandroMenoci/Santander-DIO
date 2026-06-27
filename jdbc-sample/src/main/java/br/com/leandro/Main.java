@@ -20,6 +20,11 @@ public class Main {
 
         flyway.migrate();
 
+
+        // RECURSOS AVANÇADOS DO BANCO DE DADOS
+
+//        employeeDAO.delete(1);
+
 //        var employee = new EmployeeEntity();
 //        employee.setId(3);
 //        employee.setName("Leonardo");
@@ -28,7 +33,7 @@ public class Main {
 //        employeeDAO.update(employee);
 //        System.out.println(employee);
 
-        System.out.println(employeeDAO.findById(3));
+//        System.out.println(employeeDAO.findById(3));
 
 //        employeeDAO.findAll().forEach(System.out::println);
 
