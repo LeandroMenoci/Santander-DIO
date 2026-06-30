@@ -6,5 +6,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2026062922030__create_trigger_delete_employee.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2026063009190__create_view_employee_audit.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2026063009230__create_procedure_insert_employee.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2026063019150__create_contact_table.sql" dialect="GenericSQL" />
   </component>
 </project>

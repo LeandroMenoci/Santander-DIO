@@ -1,8 +1,10 @@
 package br.com.leandro;
 
+import br.com.leandro.persistence.ContactDAO;
 import br.com.leandro.persistence.EmployeeAuditDAO;
 import br.com.leandro.persistence.EmployeeDAO;
 import br.com.leandro.persistence.EmployeeParamDAO;
+import br.com.leandro.persistence.entity.ContactEntity;
 import br.com.leandro.persistence.entity.EmployeeEntity;
 import net.datafaker.Faker;
 import org.flywaydb.core.Flyway;
@@ -20,6 +22,7 @@ public class Main {
     private final static EmployeeDAO employeeDAO = new EmployeeDAO();
     private final static EmployeeParamDAO employeeParamDAO = new EmployeeParamDAO();
     private final static EmployeeAuditDAO employeeAuditDAO = new EmployeeAuditDAO();
+    private final static ContactDAO contactDAO = new ContactDAO();
     private final static Faker faker = new Faker(Locale.of("pt", "BR"));
 
 
@@ -36,7 +39,7 @@ public class Main {
 //        employeeInsert.setSalary(new BigDecimal("1100"));
 //        employeeInsert.setBirthday(OffsetDateTime.now().minusYears(33));
 //        System.out.println(employeeInsert);
-//        employeeParamDAO.insertWithProcedure(employeeInsert);
+//        employeeParamDAO.insert(employeeInsert);
 //        System.out.println(employeeInsert);
 //
 //        var employeeUpdate = new EmployeeEntity();
@@ -57,15 +60,30 @@ public class Main {
 
 //        employeeDAO.findAll().forEach(System.out::println);
 
-        var entities = Stream.generate(() -> {
-            var employee = new EmployeeEntity();
-            employee.setName(faker.name().fullName());
-            employee.setSalary(new BigDecimal(faker.number().digits(4)));
-            employee.setBirthday(OffsetDateTime.of(faker.date().birthdayLocalDate(18, 35), LocalTime.MIN,UTC));
-            return employee;
-        }).limit(4000)
-                .toList();
-        employeeParamDAO.insertBatch(entities);
+//        var entities = Stream.generate(() -> {
+//            var employee = new EmployeeEntity();
+//            employee.setName(faker.name().fullName());
+//            employee.setSalary(new BigDecimal(faker.number().digits(4)));
+//            employee.setBirthday(OffsetDateTime.of(faker.date().birthdayLocalDate(18, 35), LocalTime.MIN,UTC));
+//            return employee;
+//        }).limit(4000)
+//                .toList();
+//        employeeParamDAO.insertBatch(entities);
+
+
+        var employeeInsert = new EmployeeEntity();
+        employeeInsert.setName("Joao");
+        employeeInsert.setSalary(new BigDecimal("3220"));
+        employeeInsert.setBirthday(OffsetDateTime.now().minusYears(35));
+        System.out.println(employeeInsert);
+        employeeParamDAO.insert(employeeInsert);
+        System.out.println(employeeInsert);
+
+//        var contact = new ContactEntity();
+//        contact.setDescription("miguelito@miguel.com");
+//        contact.setType("e-mail");
+//        contact.setEmployee(employeeInsert);
+//        contactDAO.insert(contact);
 
 
     }

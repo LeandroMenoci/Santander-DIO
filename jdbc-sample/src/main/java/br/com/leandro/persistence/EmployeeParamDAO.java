@@ -141,9 +141,10 @@ public class EmployeeParamDAO {
 
     public EmployeeEntity findById(final long id) {
         var entity = new EmployeeEntity();
+        var sql = "SELECT * FROM employees INNER JOIN contacts ON contacts.employee_id = employees.id WHERE id = ?;";
         try(
                 var connection = ConnectionUtil.getConnection();
-                var statement = connection.prepareStatement("SELECT * FROM employees WHERE id = ?;");
+                var statement = connection.prepareStatement(sql);
         ) {
             statement.setLong(1, id);
             statement.executeQuery();
