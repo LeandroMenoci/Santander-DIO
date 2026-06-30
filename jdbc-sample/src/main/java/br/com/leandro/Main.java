@@ -20,29 +20,30 @@ public class Main {
 
         flyway.migrate();
 
+//        var employeeInsert = new EmployeeEntity();
+//        employeeInsert.setName("Jose");
+//        employeeInsert.setSalary(new BigDecimal("2600"));
+//        employeeInsert.setBirthday(OffsetDateTime.now().minusYears(56));
+//        System.out.println(employeeInsert);
+//        employeeDAO.insert(employeeInsert);
+//        System.out.println(employeeInsert);
+//
+//        var employeeUpdate = new EmployeeEntity();
+//        employeeUpdate.setId(1);
+//        employeeUpdate.setName("Leonardo");
+//        employeeUpdate.setSalary(new BigDecimal(1200));
+//        employeeUpdate.setBirthday(OffsetDateTime.now().minusYears(16));
+//        employeeDAO.update(employeeUpdate);
+//        System.out.println(employeeUpdate);
 
-        // RECURSOS AVANÇADOS DO BANCO DE DADOS
+        employeeDAO.delete(1);
 
-//        employeeDAO.delete(1);
 
-//        var employee = new EmployeeEntity();
-//        employee.setId(3);
-//        employee.setName("Leonardo");
-//        employee.setSalary(new BigDecimal(1200));
-//        employee.setBirthday(OffsetDateTime.now().minusYears(16));
-//        employeeDAO.update(employee);
-//        System.out.println(employee);
 
 //        System.out.println(employeeDAO.findById(3));
 
 //        employeeDAO.findAll().forEach(System.out::println);
 
-        /*var employee = new EmployeeEntity();
-        employee.setName("João");
-        employee.setSalary(new BigDecimal("2600"));
-        employee.setBirthday(OffsetDateTime.now().minusYears(56));
-        System.out.println(employee);
-        employeeDAO.insert(employee);
-        System.out.println(employee);*/
+
     }
 }
