@@ -1,5 +1,6 @@
 package br.com.leandro;
 
+import br.com.leandro.persistence.EmployeeAuditDAO;
 import br.com.leandro.persistence.EmployeeDAO;
 import br.com.leandro.persistence.entity.EmployeeEntity;
 import org.flywaydb.core.Flyway;
@@ -10,6 +11,7 @@ import java.time.OffsetDateTime;
 public class Main {
 
     private final static EmployeeDAO employeeDAO = new EmployeeDAO();
+    private final static EmployeeAuditDAO employeeAuditDAO = new EmployeeAuditDAO();
 
 
     public static void main(String[] args) {
@@ -28,15 +30,17 @@ public class Main {
 //        employeeDAO.insert(employeeInsert);
 //        System.out.println(employeeInsert);
 //
-//        var employeeUpdate = new EmployeeEntity();
-//        employeeUpdate.setId(1);
-//        employeeUpdate.setName("Leonardo");
-//        employeeUpdate.setSalary(new BigDecimal(1200));
-//        employeeUpdate.setBirthday(OffsetDateTime.now().minusYears(16));
-//        employeeDAO.update(employeeUpdate);
-//        System.out.println(employeeUpdate);
+        var employeeUpdate = new EmployeeEntity();
+        employeeUpdate.setId(2);
+        employeeUpdate.setName("Leonardo");
+        employeeUpdate.setSalary(new BigDecimal(1200));
+        employeeUpdate.setBirthday(OffsetDateTime.now().minusYears(16));
+        employeeDAO.update(employeeUpdate);
+        System.out.println(employeeUpdate);
 
-        employeeDAO.delete(1);
+        employeeDAO.delete(2);
+
+        employeeAuditDAO.findAll().forEach(System.out::println);
 
 
 
