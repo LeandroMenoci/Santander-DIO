@@ -1,21 +1,19 @@
 package br.com.leandro;
 
+import br.com.leandro.facade.Facade;
 import br.com.leandro.strategy.*;
 
 public class Main {
     public static void main(String[] args) {
+        //FACADE
+        Facade facade = new Facade();
+        facade.migrarCliente("Venilton", "14293827");
 
 
 
 
 
-
-
-
-
-
-
-        /*// Strategy
+        /*// STRATEGY
         Comportamento normal = new ComportamentoNormal();
         Comportamento defensivo = new ComportamentoDefensivo();
         Comportamento agressivo = new ComportamentoAgressivo();
