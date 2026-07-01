@@ -1,9 +1,6 @@
 package br.com.leandro;
 
-import br.com.leandro.persistence.ContactDAO;
-import br.com.leandro.persistence.EmployeeAuditDAO;
-import br.com.leandro.persistence.EmployeeDAO;
-import br.com.leandro.persistence.EmployeeParamDAO;
+import br.com.leandro.persistence.*;
 import br.com.leandro.persistence.entity.ContactEntity;
 import br.com.leandro.persistence.entity.EmployeeEntity;
 import br.com.leandro.persistence.entity.ModuleEntity;
@@ -21,10 +18,12 @@ import static java.time.ZoneOffset.UTC;
 
 public class Main {
 
-    private final static EmployeeDAO employeeDAO = new EmployeeDAO();
+//    private final static EmployeeDAO employeeDAO = new EmployeeDAO();
     private final static EmployeeParamDAO employeeParamDAO = new EmployeeParamDAO();
     private final static EmployeeAuditDAO employeeAuditDAO = new EmployeeAuditDAO();
+    private final static ModuleDAO moduleDAO = new ModuleDAO();
     private final static ContactDAO contactDAO = new ContactDAO();
+
     private final static Faker faker = new Faker(Locale.of("pt", "BR"));
 
 
@@ -98,20 +97,22 @@ public class Main {
 
 //        employeeParamDAO.findAll().forEach(System.out::println);
 
-        var entities = Stream.generate(() -> {
-            var employee = new EmployeeEntity();
-            employee.setName(faker.name().fullName());
-            employee.setSalary(new BigDecimal(faker.number().digits(4)));
-            employee.setBirthday(OffsetDateTime.of(faker.date().birthdayLocalDate(18, 35), LocalTime.MIN,UTC));
-            employee.setModules(new ArrayList<>());
-            var moduleAmount = faker.number().numberBetween(1, 4);
-                    for (int i = 0; i < moduleAmount; i++) {
-                        var module = new ModuleEntity();
-                        module.setId(i + 1);
-                        employee.getModules().add(module);
-                    }
-            return employee;
-        }).limit(3).toList();
-        entities.forEach(employeeParamDAO::insert);
+//        var entities = Stream.generate(() -> {
+//            var employee = new EmployeeEntity();
+//            employee.setName(faker.name().fullName());
+//            employee.setSalary(new BigDecimal(faker.number().digits(4)));
+//            employee.setBirthday(OffsetDateTime.of(faker.date().birthdayLocalDate(18, 35), LocalTime.MIN,UTC));
+//            employee.setModules(new ArrayList<>());
+//            var moduleAmount = faker.number().numberBetween(1, 4);
+//                    for (int i = 0; i < moduleAmount; i++) {
+//                        var module = new ModuleEntity();
+//                        module.setId(i + 1);
+//                        employee.getModules().add(module);
+//                    }
+//            return employee;
+//        }).limit(3).toList();
+//        entities.forEach(employeeParamDAO::insert);
+
+//        moduleDAO.findAll().forEach(System.out::println);
     }
 }
