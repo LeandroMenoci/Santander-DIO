@@ -71,20 +71,28 @@ public class Main {
 //        employeeParamDAO.insertBatch(entities);
 
 
-        var employeeInsert = new EmployeeEntity();
-        employeeInsert.setName("Joao");
-        employeeInsert.setSalary(new BigDecimal("3220"));
-        employeeInsert.setBirthday(OffsetDateTime.now().minusYears(35));
-        System.out.println(employeeInsert);
-        employeeParamDAO.insert(employeeInsert);
-        System.out.println(employeeInsert);
+//        var employeeInsert = new EmployeeEntity();
+//        employeeInsert.setName("Maria de Lurdes");
+//        employeeInsert.setSalary(new BigDecimal("3121"));
+//        employeeInsert.setBirthday(OffsetDateTime.now().minusYears(21));
+//        System.out.println(employeeInsert);
+//        employeeParamDAO.insert(employeeInsert);
+//        System.out.println(employeeInsert);
+//
+//        var contact1 = new ContactEntity();
+//        contact1.setDescription("maria@lurdes.com");
+//        contact1.setType("e-mail");
+//        contact1.setEmployee(employeeInsert);
+//        contactDAO.insert(contact1);
+//
+//        var contact2 = new ContactEntity();
+//        contact2.setDescription("31999999999");
+//        contact2.setType("telefone");
+//        contact2.setEmployee(employeeInsert);
+//        contactDAO.insert(contact2);
 
-//        var contact = new ContactEntity();
-//        contact.setDescription("miguelito@miguel.com");
-//        contact.setType("e-mail");
-//        contact.setEmployee(employeeInsert);
-//        contactDAO.insert(contact);
+//        System.out.println(employeeParamDAO.findById(1));
 
-
+        employeeParamDAO.findAll().forEach(System.out::println);
     }
 }

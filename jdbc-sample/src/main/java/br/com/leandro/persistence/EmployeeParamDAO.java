@@ -1,5 +1,6 @@
 package br.com.leandro.persistence;
 
+import br.com.leandro.persistence.entity.ContactEntity;
 import br.com.leandro.persistence.entity.EmployeeEntity;
 import com.mysql.cj.jdbc.StatementImpl;
 
@@ -15,6 +16,8 @@ import static java.time.ZoneOffset.UTC;
 import static java.util.TimeZone.LONG;
 
 public class EmployeeParamDAO {
+
+    private final ContactDAO contactDAO = new ContactDAO();
 
     public void insert(final EmployeeEntity entity) {
         try(
@@ -130,6 +133,7 @@ public class EmployeeParamDAO {
                 var birthdayInstant = resultSet.getTimestamp("birthday").toInstant();
                 var birthday = OffsetDateTime.ofInstant(birthdayInstant, UTC);
                 entity.setBirthday(birthday);
+                entity.setContacts(contactDAO.findByEmployeeId(resultSet.getLong("id")));
                 entities.add(entity);
             }
 
@@ -141,7 +145,12 @@ public class EmployeeParamDAO {
 
     public EmployeeEntity findById(final long id) {
         var entity = new EmployeeEntity();
-        var sql = "SELECT * FROM employees INNER JOIN contacts ON contacts.employee_id = employees.id WHERE id = ?;";
+        var sql = """
+                SELECT e.id employee_id, e.name, e.salary, e.birthday, c.id contact_id, c.description, c.type\s
+                 FROM employees e\s
+                 INNER JOIN contacts c\s
+                 ON c.employee_id = e.id\s
+                 WHERE e.id = ?;""";
         try(
                 var connection = ConnectionUtil.getConnection();
                 var statement = connection.prepareStatement(sql);
@@ -150,12 +159,20 @@ public class EmployeeParamDAO {
             statement.executeQuery();
             var resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                entity.setId(resultSet.getLong("id"));
+                entity.setId(resultSet.getLong("employee_id"));
                 entity.setName(resultSet.getString("name"));
                 entity.setSalary(resultSet.getBigDecimal("salary"));
                 var birthdayInstant = resultSet.getTimestamp("birthday").toInstant();
                 var birthday = OffsetDateTime.ofInstant(birthdayInstant, UTC);
                 entity.setBirthday(birthday);
+                entity.setContacts(new ArrayList<>());
+                do {
+                    var contact = new ContactEntity();
+                    contact.setId(resultSet.getLong("contact_id"));
+                    contact.setDescription(resultSet.getString("description"));
+                    contact.setType(resultSet.getString("type"));
+                    entity.getContacts().add(contact);
+                } while (resultSet.next());
             }
 
         } catch (SQLException ex) {
