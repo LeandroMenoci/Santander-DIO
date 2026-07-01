@@ -1,4 +1,4 @@
-package br.com.leandro;
+package br.com.leandro.singleton;
 
 /*
  * Singleton "Lazy Holder"
