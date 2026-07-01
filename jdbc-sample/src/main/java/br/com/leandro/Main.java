@@ -6,12 +6,14 @@ import br.com.leandro.persistence.EmployeeDAO;
 import br.com.leandro.persistence.EmployeeParamDAO;
 import br.com.leandro.persistence.entity.ContactEntity;
 import br.com.leandro.persistence.entity.EmployeeEntity;
+import br.com.leandro.persistence.entity.ModuleEntity;
 import net.datafaker.Faker;
 import org.flywaydb.core.Flyway;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -30,8 +32,9 @@ public class Main {
 
         var flyway = Flyway.configure()
                 .dataSource("jdbc:mysql://localhost:3306/jdbc-sample", "root", "123456")
+//                .cleanDisabled(false)
                 .load();
-
+//        flyway.clean();
         flyway.migrate();
 
 //        var employeeInsert = new EmployeeEntity();
@@ -93,6 +96,22 @@ public class Main {
 
 //        System.out.println(employeeParamDAO.findById(1));
 
-        employeeParamDAO.findAll().forEach(System.out::println);
+//        employeeParamDAO.findAll().forEach(System.out::println);
+
+        var entities = Stream.generate(() -> {
+            var employee = new EmployeeEntity();
+            employee.setName(faker.name().fullName());
+            employee.setSalary(new BigDecimal(faker.number().digits(4)));
+            employee.setBirthday(OffsetDateTime.of(faker.date().birthdayLocalDate(18, 35), LocalTime.MIN,UTC));
+            employee.setModules(new ArrayList<>());
+            var moduleAmount = faker.number().numberBetween(1, 4);
+                    for (int i = 0; i < moduleAmount; i++) {
+                        var module = new ModuleEntity();
+                        module.setId(i + 1);
+                        employee.getModules().add(module);
+                    }
+            return employee;
+        }).limit(3).toList();
+        entities.forEach(employeeParamDAO::insert);
     }
 }

@@ -2,6 +2,7 @@ package br.com.leandro.persistence;
 
 import br.com.leandro.persistence.entity.ContactEntity;
 import br.com.leandro.persistence.entity.EmployeeEntity;
+import br.com.leandro.persistence.entity.ModuleEntity;
 import com.mysql.cj.jdbc.StatementImpl;
 
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import static java.util.TimeZone.LONG;
 public class EmployeeParamDAO {
 
     private final ContactDAO contactDAO = new ContactDAO();
+    private final AccessesDAO accessesDAO = new AccessesDAO();
 
     public void insert(final EmployeeEntity entity) {
         try(
@@ -32,6 +34,7 @@ public class EmployeeParamDAO {
             statement.executeUpdate();
             if(statement instanceof StatementImpl impl) {
                 entity.setId(impl.getLastInsertID());
+                entity.getModules().stream().map(ModuleEntity::getId).forEach(m -> accessesDAO.insert(entity.getId(), m));
             }
 
         } catch (SQLException ex) {
