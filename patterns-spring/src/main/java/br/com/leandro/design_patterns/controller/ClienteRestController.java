@@ -16,8 +16,13 @@ public class ClienteRestController {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Cliente>> buscarTodos(@PathVariable Long id) {
-        return ResponseEntity.ok(Collections.singleton(clienteService.buscarPorId(id)));
+    public ResponseEntity<Iterable<Cliente>> buscarTodos() {
+        return ResponseEntity.ok(clienteService.buscarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.buscarPorId(id));
     }
 
     @PostMapping
