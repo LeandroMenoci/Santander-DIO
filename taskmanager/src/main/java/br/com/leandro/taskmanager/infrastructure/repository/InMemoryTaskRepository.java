@@ -3,9 +3,12 @@ package br.com.leandro.taskmanager.infrastructure.repository;
 import br.com.leandro.taskmanager.domain.Task;
 import br.com.leandro.taskmanager.domain.TaskId;
 import br.com.leandro.taskmanager.domain.TaskRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+
+@Repository
 public class InMemoryTaskRepository implements TaskRepository {
     private final Map<TaskId, Task> storage = new HashMap<>();
 
