@@ -26,7 +26,7 @@ class CreateTaskUserCaseTest {
     TaskRepository repository;
 
     @InjectMocks
-    CreateTaskUserCase useCase;
+    CreateTaskUseCase useCase;
 
     @Test
     void should_create_task_seccessfully() {

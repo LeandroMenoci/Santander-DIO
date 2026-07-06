@@ -7,11 +7,11 @@ import br.com.leandro.taskmanager.domain.TaskRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateTaskUserCase {
+public class CreateTaskUseCase {
 
     private final TaskRepository repository;
 
-    public CreateTaskUserCase(TaskRepository repository) {
+    public CreateTaskUseCase(TaskRepository repository) {
         this.repository = repository;
     }
 
