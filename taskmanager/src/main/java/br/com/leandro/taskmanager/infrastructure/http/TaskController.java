@@ -32,6 +32,7 @@ public class TaskController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     TaskResponse create(@Valid @RequestBody CreateTaskRequest request) {
         var input = request.toInput();
         var output = createTaskUseCase.execute(input);

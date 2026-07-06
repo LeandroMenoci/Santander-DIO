@@ -1,0 +1,28 @@
+== Criar Tarefa
+
+Criar uma nova tarefa.
+
+== Requisição
+include::{snippets}/create-task/curl-request.adoc[]
+
+---
+
+== Códigos de Status
+
+|===
+|Código | Descrição
+
+|200 OK     | Requisição executada com sucesso
+|201 Created    | Recurso criado com sucesso
+|204 No Content | Recurso Removido  com sucesso
+|400 Bad Request| Erro de validação
+|404 Not Found  | Recurso não encontrado
+|===
+
+---
+
+== Observações
+
+- Todos os endpoint retornam JSON
+- Datas devem estar no formato ISO-8601
+- O campo `status` deve seguir os valores definidos no backend
