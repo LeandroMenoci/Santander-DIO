@@ -5,6 +5,7 @@ import br.com.leandro.taskmanager.domain.TaskId;
 import br.com.leandro.taskmanager.infrastructure.http.request.CreateTaskRequest;
 import br.com.leandro.taskmanager.infrastructure.http.request.UpdateTaskRequest;
 import br.com.leandro.taskmanager.infrastructure.http.response.TaskResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class TaskController {
     }
 
     @PostMapping
-    TaskResponse create(@RequestBody CreateTaskRequest request) {
+    TaskResponse create(@Valid @RequestBody CreateTaskRequest request) {
         var input = request.toInput();
         var output = createTaskUseCase.execute(input);
         return TaskResponse.from(output);
