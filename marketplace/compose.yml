@@ -14,5 +14,21 @@ services:
       timeout: 5s
       retries: 5
 
+  catalog-database:
+    image: mysql:9.6
+    environment:
+      MYSQL_DATABASE: catalog
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3308:3306"
+    volumes:
+      - catalog_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uapp", "-papp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 volumes:
   registration_data:
+  catalog_data:
