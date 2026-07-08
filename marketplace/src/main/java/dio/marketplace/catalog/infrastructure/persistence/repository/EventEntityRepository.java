@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.UUID;
 
 @RepositoryRestResource
-public interface EventiEntityRepository extends CrudRepository<Event, UUID> {
+public interface EventEntityRepository extends CrudRepository<Event, UUID> {
 }
